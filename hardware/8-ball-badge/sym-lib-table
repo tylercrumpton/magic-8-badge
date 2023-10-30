@@ -1,0 +1,5 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "project_specific")(type "KiCad")(uri "${KIPRJMOD}/includes/project_specific.kicad_sym")(options "")(descr ""))
+  (lib (name "lcsc")(type "KiCad")(uri "${KIPRJMOD}/includes/lcsc.kicad_sym")(options "")(descr ""))
+)

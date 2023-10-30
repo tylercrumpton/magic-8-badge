@@ -1,0 +1,15 @@
+(footprint "battery-layout" (version 20221018) (generator pcbnew)
+  (layer "F.Cu")
+  (attr board_only exclude_from_pos_files exclude_from_bom)
+  (fp_text reference "G***" (at 8.420207 -28.435804) (layer "F.SilkS") hide
+      (effects (font (size 1.5 1.5) (thickness 0.3)))
+    (tstamp b3d9cf97-6652-4164-a674-41490be8dead)
+  )
+  (fp_text value "LOGO" (at 0.75 0) (layer "F.SilkS") hide
+      (effects (font (size 1.5 1.5) (thickness 0.3)))
+    (tstamp bb34b45f-e0af-43b8-b6a5-126324e704d8)
+  )
+  (fp_circle (center 0 0) (end 4.5 0)
+    (stroke (width 0.1) (type default)) (fill none) (layer "Eco1.User") (tstamp f2c8e055-c459-43d6-b71c-e368b6c1af42))
+  (pad "" thru_hole oval (at 0 0 45) (size 2.35 1.1) (drill oval 2 0.75) (layers "*.Cu" "F.Mask") (tstamp d6661651-aa2a-46d2-9fb8-69600da1d888))
+)
