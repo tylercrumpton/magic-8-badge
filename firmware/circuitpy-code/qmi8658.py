@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2023 Tyler Crumpton for CrumpSpace
+#
+# SPDX-License-Identifier: MIT
+
 import busio
 from digitalio import DigitalInOut, Direction, Pull
 from microcontroller import Pin

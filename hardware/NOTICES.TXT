@@ -1,0 +1,7 @@
+This project and associated documentation are licensed under the CERN Open Hardware License v2 - Permissive. The full text of the license, is available in the LICENSE.TXT file.
+
+This project is developed by Tyler Crumpton and CrumpSpace. All modifications and distributions of this design should appropriately credit Tyler Crumpton and CrumpSpace.
+
+The CrumpSpace logo is a trademark of CrumpSpace and should not be used in association with hardware or software that is sold or distributed by others. All other uses of the logo are not part of the license grant of this project and will require explicit permission from CrumpSpace.
+
+If you modify this design, please indicate your changes clearly and relabel your design to avoid confusion with the original.

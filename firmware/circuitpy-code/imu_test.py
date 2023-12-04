@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2023 Tyler Crumpton for CrumpSpace
+#
+# SPDX-License-Identifier: MIT
+
 from time import sleep
 from math import floor
 import board

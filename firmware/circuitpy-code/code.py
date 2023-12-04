@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2023 Tyler Crumpton for CrumpSpace
+#
+# SPDX-License-Identifier: MIT
+
 import alarm
 from analogio import AnalogIn
 from digitalio import DigitalInOut, Direction, Pull
