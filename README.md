@@ -4,6 +4,8 @@ _Hardware, software, and other resouces for a fun little CircuitPython-compatibl
 
 **Note:** Lots of information and improvements to be added soon!
 
+![IMG_0826](https://github.com/tylercrumpton/magic-8-badge/assets/1317406/b6c35045-c85b-43b0-8012-c5e975cc88e3)
+
 ## Hardware
 
 All of the hardware design files are included in the [`hardware/`](./hardware) directory. The board was designed with KiCad 7, using mostly components from JLCPCB's [Assembly Parts Library](https://jlcpcb.com/parts).
