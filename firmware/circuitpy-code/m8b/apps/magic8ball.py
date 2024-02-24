@@ -1,6 +1,7 @@
 import random
 import time
 import terminalio
+import displayio
 
 from adafruit_display_text.label import Label
 
@@ -59,7 +60,7 @@ class Magic8Ball:
         self.selected_answer = ""
         self.is_shaking = False
         self.wants_to_exit = False
-        self.label = Label(
+        self.answer_label = Label(
             terminalio.FONT,
             text="",
             color=(255, 255, 255),
@@ -69,9 +70,22 @@ class Magic8Ball:
             anchored_position=(120, 120),
             save_text=False,
         )
+        self.quit_label = Label(
+            terminalio.FONT,
+            text="Tap B to quit",
+            color=(128, 128, 128),
+            background_color=(0, 0, 0),
+            scale=1,
+            anchor_point=(0.5, 0.5),
+            anchored_position=(120, 200),
+            save_text=False,
+        )
         self.just_started = True
         self.needs_redraw = True
-        self.label.text = "Shake me!"
+        self.answer_label.text = "Shake me!"
+        self.root_display_group = displayio.Group()
+        self.root_display_group.append(self.answer_label)
+        self.root_display_group.append(self.quit_label)
 
     def handle_event(self, event: Event):
         if isinstance(event, ShakeEvent) or (
@@ -81,7 +95,7 @@ class Magic8Ball:
             print("Shaking!")
             self.is_shaking = True
             self.start_shake_time = time.monotonic()
-            self.label.scale = 1
+            self.answer_label.scale = 1
         elif isinstance(event, TouchEvent) and event.pad in [Touch.A, Touch.B]:
             print("Exiting Magic8Ball app")
             self.wants_to_exit = True
@@ -95,7 +109,7 @@ class Magic8Ball:
             self.selected_answer = random.choice(self.answers)
             self.needs_redraw = True
             if current_time - self.start_shake_time > SHAKE_DURATION:
-                self.label.scale = 2
+                self.answer_label.scale = 2
                 self.is_shaking = False
 
     def draw(self, display):
@@ -108,7 +122,7 @@ class Magic8Ball:
 
         self.needs_redraw = False
         if self.is_shaking:
-            self.label.text = self.selected_answer
+            self.answer_label.text = self.selected_answer
 
     def stop(self):
         pass  # Nothing to clean up in this app
