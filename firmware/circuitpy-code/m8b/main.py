@@ -1,16 +1,24 @@
 import time
 from m8b.apps.mainmenu import MainMenu
 from m8b.apps.magic8ball import Magic8Ball
+from m8b.apps.touchtest import TouchTest
+from m8b.apps.imutest import IMUTest
 from m8b.hardware.display import display
 from m8b.hardware import get_events
 
-app_list = {"Main Menu": MainMenu, "Magic 8 Ball": Magic8Ball}
+app_list = {
+    "Main Menu": MainMenu,
+    "Magic 8 Ball": Magic8Ball,
+    "Touch Test": TouchTest,
+    "IMU Test": IMUTest,
+}
 
 
 def main_loop():
     print("main_loop started")
     last_draw_time = time.monotonic()
     app = MainMenu()
+    # app = IMUTest()
 
     while True:
         # Check for and handle any events (Event Loop)

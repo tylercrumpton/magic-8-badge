@@ -12,7 +12,8 @@ class MainMenu:
         print("Main Menu started")
         self.options = [
             "Magic 8 Ball",
-            "Settings",
+            "Touch Test",
+            "IMU Test",
         ]
         self.current_option_index = 0
         self.animation_frames_remaining = 0
