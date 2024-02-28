@@ -4,6 +4,7 @@ import displayio
 
 from m8b.event import Event
 from m8b.hardware.touch import TouchEvent, TouchAction
+from m8b.hardware.charger import ChargerEvent, ChargingState
 from m8b.hardware.pins import Touch
 
 
@@ -90,6 +91,13 @@ class MainMenu:
 
                 self.current_option_index %= len(self.options)
                 self.needs_redraw = True
+        elif isinstance(event, ChargerEvent):
+            if event.state == ChargingState.CHARGING:
+                print("Charging!")
+            elif event.state == ChargingState.NOT_CHARGING:
+                print("Not charging!")
+            elif event.state == ChargingState.FULL:
+                print("Charged!")
 
     def run(self):
         pass
