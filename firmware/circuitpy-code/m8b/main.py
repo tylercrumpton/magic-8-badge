@@ -1,7 +1,6 @@
+from m8b.hardware.backlight import backlight
 from m8b.hardware.display import display
-import displayio
-
-display.root_group = displayio.Group()
+display.root_group.hidden = True
 
 import time
 import alarm
@@ -24,7 +23,8 @@ APP_LIST = {
     "IMU Test": IMUTest,
 }
 INTERACTION_EVENTS = [ShakeEvent, TouchEvent]
-SLEEP_TIME = 30  # seconds
+SLEEP_TIME = 5  # seconds
+DIM_TIME = 3  # seconds
 
 last_interaction_time = time.monotonic()
 
@@ -64,6 +64,11 @@ def main_loop():
         # Check if the device is intactive and we should go to sleep
         if (current_time - last_interaction_time) > SLEEP_TIME:
             go_to_sleep()
+        elif (current_time - last_interaction_time) > SLEEP_TIME - DIM_TIME:
+            # Dim based on time since last interaction
+            dim_factor = (current_time - last_interaction_time - (SLEEP_TIME - DIM_TIME)) / DIM_TIME
+            backlight.brightness = 1.0 - dim_factor
+
 
 
 def feed_sleep_dog():
@@ -73,6 +78,9 @@ def feed_sleep_dog():
 
 def go_to_sleep():
     print("Sleeping, wake on shake")
+    backlight.brightness = 0.0
+    display.root_group.hidden = True
+
     alarm.exit_and_deep_sleep_until_alarms(shake.get_pin_alarm())
 
 

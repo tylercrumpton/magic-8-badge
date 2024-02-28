@@ -19,6 +19,5 @@ display = GC9A01(
     width=240,
     height=240,
     rotation=180,
-    backlight_pin=board.LCD_BACKLIGHT,
 )
 display.root_group = displayio.Group()
