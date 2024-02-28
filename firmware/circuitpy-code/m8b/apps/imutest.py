@@ -5,7 +5,7 @@ from adafruit_display_text.label import Label
 
 from m8b.event import Event
 from m8b.hardware.imu import IMUEvent
-from m8b.hardware.touch import TouchEvent
+from m8b.hardware.touch import TouchAction, TouchEvent
 from m8b.hardware.pins import Touch
 
 
@@ -46,7 +46,7 @@ class IMUTest:
         )
         self.quit_label = Label(
             terminalio.FONT,
-            text="Tap B to quit",
+            text="Hold B to quit",
             color=(128, 128, 128),
             background_color=(0, 0, 0),
             scale=1,
@@ -71,8 +71,11 @@ class IMUTest:
                 f"Gyro: {tuple(round(i, 1) for i in event.gyro)}"
             )
         elif isinstance(event, TouchEvent) and event.pad == Touch.B:
-            print("Exiting IMU Test app")
-            self.wants_to_exit = True
+            if event.action == TouchAction.HOLD_START:
+                self.quit_label.text = "Release to quit"
+            elif event.action == TouchAction.HOLD_END:
+                print("Exiting IMU Test app")
+                self.wants_to_exit = True
 
     def run(self):
         """Run the app's logic here.

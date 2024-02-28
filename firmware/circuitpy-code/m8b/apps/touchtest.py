@@ -4,7 +4,7 @@ import displayio
 from adafruit_display_text.label import Label
 
 from m8b.event import Event
-from m8b.hardware.touch import TouchEvent
+from m8b.hardware.touch import TouchAction, TouchEvent
 from m8b.hardware.pins import Touch
 
 
@@ -43,12 +43,15 @@ class TouchTest:
     def handle_event(self, event: Event):
         if isinstance(event, TouchEvent):
             self.event_label.scale = 1
-            if event.action == "PRESS_START":
+            if event.action == TouchAction.PRESS_START:
                 self.event_label.text = f"Pad {event.pad} pressed!"
-            elif event.action == "PRESS_END":
+            elif event.action == TouchAction.PRESS_END:
                 self.event_label.text = f"Pad {event.pad} released!"
-            elif event.action == "HOLD_START":
+            elif event.action == TouchAction.HOLD_START:
                 self.event_label.text = f"Pad {event.pad} held!"
+                if event.pad == Touch.B:
+                    self.quit_label.text = "Release to quit"
+            elif event.action == TouchAction.HOLD_END:
                 if event.pad == Touch.B:
                     self.wants_to_exit = True
 
