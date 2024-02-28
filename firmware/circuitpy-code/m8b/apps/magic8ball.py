@@ -114,7 +114,7 @@ class Magic8Ball:
 
     def draw(self, display):
         if self.just_started:
-            display.root_group = self.label
+            display.root_group = self.root_display_group
             self.just_started = False
 
         if not self.needs_redraw:
