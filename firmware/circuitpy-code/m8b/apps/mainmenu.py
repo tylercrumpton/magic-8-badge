@@ -15,6 +15,7 @@ class MainMenu:
             "Magic 8 Ball",
             "Touch Test",
             "IMU Test",
+            "Backlight Test",
         ]
         self.current_option_index = 0
         self.animation_frames_remaining = 0

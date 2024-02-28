@@ -1,5 +1,6 @@
 from m8b.hardware.backlight import backlight
 from m8b.hardware.display import display
+
 display.root_group.hidden = True
 
 import time
@@ -9,22 +10,23 @@ from m8b.apps.mainmenu import MainMenu
 from m8b.apps.magic8ball import Magic8Ball
 from m8b.apps.touchtest import TouchTest
 from m8b.apps.imutest import IMUTest
-
+from m8b.apps.backlighttest import BacklightTest
 
 from m8b.hardware.shake import ShakeEvent, shake
 from m8b.hardware.touch import TouchEvent
 from m8b.hardware import get_events
 
+from m8b.helpers.backlightcontroller import backlight_controller
 
 APP_LIST = {
     "Main Menu": MainMenu,
     "Magic 8 Ball": Magic8Ball,
     "Touch Test": TouchTest,
     "IMU Test": IMUTest,
+    "Backlight Test": BacklightTest,
 }
 INTERACTION_EVENTS = [ShakeEvent, TouchEvent]
-SLEEP_TIME = 5  # seconds
-DIM_TIME = 3  # seconds
+SLEEP_TIME = 30  # seconds
 
 last_interaction_time = time.monotonic()
 
@@ -33,9 +35,12 @@ def main_loop():
     print("main_loop started")
     last_draw_time = time.monotonic()
     app = MainMenu()
-    # app = IMUTest()
+    backlight_controller.ramp_to(1.0, 1)
 
     while True:
+        # Update the backlight
+        backlight_controller.update()
+
         # Check for and handle any events (Event Loop)
         events = get_events()
         for event in events:
@@ -61,14 +66,9 @@ def main_loop():
             else:
                 app = APP_LIST[next_app_to_run]()
 
-        # Check if the device is intactive and we should go to sleep
+        # Check if the device is inactive and we should go to sleep
         if (current_time - last_interaction_time) > SLEEP_TIME:
             go_to_sleep()
-        elif (current_time - last_interaction_time) > SLEEP_TIME - DIM_TIME:
-            # Dim based on time since last interaction
-            dim_factor = (current_time - last_interaction_time - (SLEEP_TIME - DIM_TIME)) / DIM_TIME
-            backlight.brightness = 1.0 - dim_factor
-
 
 
 def feed_sleep_dog():

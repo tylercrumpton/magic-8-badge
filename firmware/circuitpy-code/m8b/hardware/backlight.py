@@ -4,12 +4,12 @@ from m8b.hardware.pins import BACKLIGHT_PIN
 
 class Backlight:
     def __init__(self):
-        self._backlight = PWMOut(BACKLIGHT_PIN, frequency=1000, duty_cycle=0)
+        self._backlight = PWMOut(BACKLIGHT_PIN, frequency=10000, duty_cycle=0)
 
     @property
     def brightness(self):
         return self._backlight.duty_cycle / 65535
-    
+
     @brightness.setter
     def brightness(self, value:float):
         duty_cycle = int(value * 65535)
