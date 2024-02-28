@@ -3,10 +3,12 @@ from digitalio import DigitalInOut, Direction, Pull
 from m8b.hardware.pins import CHARGING_PIN, STANDBY_PIN
 from m8b.event import Event
 
+
 class ChargingState:
     CHARGING = "CHARGING"
     FULL = "FULL"
     NOT_CHARGING = "NOT_CHARGING"
+
 
 class ChargerEvent(Event):
     def __init__(self, state):
@@ -36,17 +38,12 @@ class Charger:
 
         return charging_state
 
-
     def get_events(self) -> list[ChargerEvent]:
         events = []
 
         new_charging_state = self.charging_state
         if new_charging_state != self._previous_state:
-            events.append(
-                ChargerEvent(
-                    state=new_charging_state
-                )
-            )
+            events.append(ChargerEvent(state=new_charging_state))
             self._previous_state = new_charging_state
 
         return events
